@@ -1,0 +1,14 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Установить nginx
+    apt:
+      name: nginx
+      state: present
+      update_cache: yes
+  - name: Включить и (пере)запустить службу nginx, разблокировать если требуется
+    systemd:
+      name: nginx
+      enabled: yes
+      state: restarted
+      masked: no
